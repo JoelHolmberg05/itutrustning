@@ -1,0 +1,30 @@
+Kund möte
+databas med tools som ör linkade till personer eller rum
+
+LogIn primärt till admin atleast
+
+utrustning
+datorer telefoner
+
+Databas
+Användare
+Utrustning
+in use y/n
+
+
+lista utrustnin
+Category
+Sort
+search
+
+lägg til utrustning/anvöndare/rum
+preferably modals but can be page
+utrustning måste ha ru eller användare
+
+edit/delete with confirm page
+
+logout
+
+fixarverkstad med Ponttus 11.12 12.30-15.45 // 19.12 12.30-15.45
+
+Yrkesprov 30.1.26

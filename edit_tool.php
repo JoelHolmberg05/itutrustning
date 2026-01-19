@@ -131,7 +131,7 @@ if (isset($_POST['update'])) {
         <br><br>
 
         <button type="submit" name="update" class="btn btn-success">Update Tool</button>
-        <a href="search_page.php" class="btn btn-secondary">Cancel</a>
+        <a href="search_page.php" class="btn btn-secondary">Back</a>
     </form>
 </div>
 

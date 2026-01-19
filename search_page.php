@@ -99,7 +99,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php endif; ?>
     <?php endif; ?>
 
-    <a href="index.php" class="btn btn-secondary mt-4">⬅ Back</a>
+    <a href="index.php" class="btn btn-secondary mt-4">Back</a>
 </div>
 </body>
 </html>

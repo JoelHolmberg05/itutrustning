@@ -17,7 +17,7 @@
 </head>
 <body>
 
-    <a href="tool_page.php" class="button">List of tools</a>
+    <a href="search_page.php" class="button">List of tools</a>
 
     <br><br>
     <br><br>

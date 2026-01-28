@@ -130,7 +130,7 @@ if (isset($_POST['update'])) {
         </select>
         <br><br>
 
-        <button type="submit" name="update" class="btn btn-success">Update Tool</button>
+        <button type="submit" name="update" class="btn btn-success">Update Info</button>
         <a href="search_page.php" class="btn btn-secondary">Back</a>
     </form>
 </div>

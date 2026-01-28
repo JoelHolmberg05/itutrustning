@@ -11,9 +11,6 @@ if (isset($_POST['logout'])) {
 // Menu links for guests
 $menuLinks = [
     ["title" => "Hem", "url" => "index.php"],
-    ["title" => "Böcker", "url" => "search_page.php"],
-    ["title" => "Exklusivt", "url" => "exclusives.php"],
-    ["title" => "Om oss", "url" => "about_us.php"],
     ["title" => "Logga in", "url" => "login.php"],
 ];
 ?>
@@ -28,7 +25,7 @@ $menuLinks = [
 <header>
     <nav id="navigation">
         <a href="index.php">
-            <img src="images/Qvintus_Logo.png" style="height: 60px; width: 120px;">
+            <!--<img src="images/Qvintus_Logo.png" style="height: 60px; width: 120px;">-->
         </a>
 
         <?php if ($user->checkUserLogInStatus()): ?>

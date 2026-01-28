@@ -54,8 +54,8 @@
     $departments = $user->getDepartments();
     ?>
 
-    <form method="post" action="">
-        <h1>Register New Tool</h1><br>
+    <form method="post" action="" class="addinfoform">
+        <h1 class="formheader">Register New Tool</h1><br>
         <label for="name">Tool name:</label>
         <input type="text" id="tool_name" name="tool_name" required><br><br>
 
@@ -106,8 +106,8 @@
 
     <br><br>
 
-    <form method="post" action="">
-        <h1>Register New User</h1><br>
+    <form method="post" action="" class="addinfoform">
+        <h1 class="formheader">Register New User</h1><br>
         <label for="username">Username</label><br>
         <input type="text" id="username" name="username" required><br><br>
 

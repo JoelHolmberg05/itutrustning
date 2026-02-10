@@ -46,22 +46,9 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php endif; ?>
 
     <?php if (!empty($results)): ?>
-
-
-
-
-
-
-
-
-<div class="main-container">
-
-    
-
-    <?php if (!empty($results)): ?>
         <div class="card-grid">
             <?php foreach ($results as $tool): ?>
-                <div class="card" data-bs-toggle="modal" data-bs-target="#toolModal<?= $tool['t_id'] ?>">
+                <div class="card">
                     <div class="card-content">
                         <h4><?= htmlspecialchars($tool['t_name']) ?></h4>
                         <p class="genre"><?= htmlspecialchars($tool['t_type']) ?></p>
@@ -73,30 +60,10 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                 </div>
 
-                <!-- Modal with more info -->
-                <div class="modal fade" id="toolModal<?= $tool['t_id'] ?>" tabindex="-1">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title"><?= htmlspecialchars($tool['t_name']) ?></h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p><strong>Type:</strong> <?= htmlspecialchars($tool['t_type']) ?></p>
-                                <p><strong>Serial Number:</strong> <?= htmlspecialchars($tool['t_snumber']) ?></p>
-                                <p><strong>Status:</strong> <?= htmlspecialchars($tool['status'] ?? 'Unknown') ?></p>
-                                <p><strong>User:</strong> <?= htmlspecialchars($tool['user'] ?? 'N/A') ?></p>
-                                <p><strong>Room:</strong> <?= htmlspecialchars($tool['room'] ?? 'N/A') ?></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             <?php endforeach; ?>
         </div>
     <?php else: ?>
         <p>No tools found</p>
-    <?php endif; ?>
     <?php endif; ?>
 
     <a href="index.php" class="btn btn-secondary mt-4">Back</a>

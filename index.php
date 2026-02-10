@@ -18,6 +18,7 @@
 <body>
 
     <a href="search_page.php" class="button">List of tools</a>
+    <a href="search_user.php" class="button">List of users</a>
 
     <br><br>
     <br><br>
@@ -62,6 +63,8 @@
         <label for="tool_serial_number">Tool serial number:</label>
         <input type="text" id="tool_snumber" name="tool_snumber" required><br><br>
 
+        
+        <label for="tool_status">Tool type:</label>
         <select id="tool_type" name="tool_type" required>
             <option value="">Select Type</option>
             <option value="Computer">Computer</option>

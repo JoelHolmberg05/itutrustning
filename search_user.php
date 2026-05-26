@@ -1,5 +1,13 @@
 <?php
 include "includes/header.php";
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit;
+}
+if (!$user->checkUserRole(2)) {
+    header("Location: login.php");
+    exit;
+}
 require_once "includes/db.php"; // PDO connection
 
 // Get search term
@@ -84,9 +92,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <p>No users found</p>
     <?php endif; ?>
 
-    <a href="index.php" class="btn btn-secondary mt-4">Back</a>
+    <a href="addnew.php" class="btn btn-secondary mt-4">Back</a>
 </div>
 </body>
 </html>
-
-<?php include "includes/footer.php"; ?>

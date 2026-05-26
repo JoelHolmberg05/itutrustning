@@ -28,21 +28,11 @@ $menuLinks = [
             <!--<img src="images/Qvintus_Logo.png" style="height: 60px; width: 120px;">-->
         </a>
 
-        <?php if ($user->checkUserLogInStatus()): ?>
-            <a href="../index.php" class="button">Hem</a>
-
-            <?php if ($user->checkUserRole(50)): ?>
-                <a href="admin.php" class="button">Adminpanel</a>
-            <?php endif; ?>
-
-            <form method="post" action="" style="display: inline;">
-                <input type="submit" value="Logga ut" name="logout" class="button">
-            </form>
-
-        <?php else: ?>
-            <?php foreach ($menuLinks as $link): ?>
-                <a href="<?= $link['url'] ?>" class="nav-button"><?= $link['title'] ?></a>
-            <?php endforeach; ?>
-        <?php endif; ?>
+    <a href="search_page.php" class="btn btn-sm btn-warning mt-2">List of tools</a>
+    <a href="search_user.php" class="btn btn-sm btn-warning mt-2">List of users</a>
+    <a href="addnew.php" class="btn btn-sm btn-warning mt-2">Add info</a>
+    <form method="POST" style="display:inline;">
+        <button type="submit" name="logout" class="btn btn-sm btn-warning mt-2">Log out</button>
+    </form>
     </nav>
 </header>

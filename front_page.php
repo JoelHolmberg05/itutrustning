@@ -190,5 +190,3 @@ require_once "includes/db.php"; // PDO connection
 </div> <!-- End main-container -->
 </body>
 </html>
-
-<?php include "includes/footer.php"; ?>

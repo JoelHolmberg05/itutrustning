@@ -1,5 +1,13 @@
 <?php
 include "includes/header.php";
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit;
+}
+if (!$user->checkUserRole(2)) {
+    header("Location: login.php");
+    exit;
+}
 require_once "includes/db.php";
 require_once "includes/class.user.php";
 
@@ -115,5 +123,3 @@ if (isset($_POST['update'])) {
 
 </body>
 </html>
-
-<?php include "includes/footer.php"; ?>

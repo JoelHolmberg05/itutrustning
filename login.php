@@ -1,7 +1,5 @@
 <?php
-session_start();
-require_once 'includes/db.php';
-include "includes/header.php";
+require_once 'includes/config.php';
 
 $error = '';
 
@@ -11,22 +9,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Prepare and execute the query
     $stmt = $conn->prepare("
-        SELECT u.*, r.role_name, r.role_level
-        FROM t_user u
-        JOIN t_roles r ON u.role_id_fk = r.role_id
-        WHERE u.username = ?
+        SELECT u.*
+        FROM user_table u
+        WHERE u.u_name = ?
     ");
     $stmt->execute([$username]);
     $user = $stmt->fetch();
 
-    if ($user && password_verify($password, $user['password'])) {
+    if ($user && password_verify($password, $user['u_password'])) {
         // Successful login
-        $_SESSION['user_id'] = $user['user_id'];
-        $_SESSION['username'] = $user['username'];
-        $_SESSION['role_name'] = $user['role_name'];
-        $_SESSION['role_level'] = $user['role_level'];
+        $_SESSION['user_id'] = $user['u_id'];
+        $_SESSION['user'] = $user['u_name'];
+        $_SESSION['username'] = $user['u_name'];
+        $_SESSION['u_role_fk'] = $user['u_role_fk'];
+        $_SESSION['role_name'] = 'User'; // Default
+        $_SESSION['role_level'] = $user['u_role_fk'];
 
-        header("Location: front_page.php");
+        header("Location: addnew.php");
         exit();
     } else {
         $error = "Felaktigt användarnamn eller lösenord.";
@@ -34,17 +33,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<h2>Logga in</h2>
-<?php if ($error): ?>
-    <p style="color:red;"><?= $error ?></p>
-<?php endif; ?>
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <title>Logga in</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
 
-<form method="POST">
-    <label>Användarnamn:</label><br>
-    <input type="text" name="username" required><br><br>
+<div class="main-container">
+    <h2>Logga in</h2>
+    <?php if ($error): ?>
+        <p style="color:red;" class="text-danger"><?= $error ?></p>
+    <?php endif; ?>
 
-    <label>Lösenord:</label><br>
-    <input type="password" name="password" required><br><br>
+    <form method="POST" class="mt-4">
+        <div class="mb-3">
+            <label for="username" class="form-label">Användarnamn:</label>
+            <input type="text" id="username" name="username" class="form-control" required>
+        </div>
 
-    <button type="submit">Logga in</button>
-</form>
+        <div class="mb-3">
+            <label for="password" class="form-label">Lösenord:</label>
+            <input type="password" id="password" name="password" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Logga in</button>
+    </form>
+</div>
+
+</body>
+</html>

@@ -18,12 +18,13 @@ class user {
     public function checkUserRegisterInput() {
         $error = 0;
         
+        $cleanDepartment = isset($_POST['u_department']) ? $this->cleanInput($_POST['u_department']) : '';
+
         if (isset($_POST['register'])) {
-            
             $cleanName = $this->cleanInput($_POST['username']);
             $stmt_checkIfUserExist = $this->conn->prepare("SELECT * FROM user_table WHERE u_name = :uname OR u_department_fk = :department");
             $stmt_checkIfUserExist->bindValue(":uname", $cleanName, PDO::PARAM_STR);
-            $stmt_checkIfUserExist->bindValue(":department", $_POST['u_department'], PDO::PARAM_STR);
+            $stmt_checkIfUserExist->bindValue(":department", $cleanDepartment, PDO::PARAM_STR);
             $stmt_checkIfUserExist->execute();
         }
 
@@ -35,11 +36,9 @@ class user {
                 $error=1;
             }
 
-            if (!empty($userNameMatch)) {
-                if ($userNameMatch['u_department_fk'] == $_POST['department']) {
-                    $this->errorMessage .= " | Department is already in use";
-                    $error=1;
-                }
+            if ($userNameMatch['u_department_fk'] == $cleanDepartment) {
+                $this->errorMessage .= " | Department is already in use";
+                $error=1;
             }
         }
         
@@ -49,12 +48,12 @@ class user {
 
         else {
             if ($_POST['password'] != $_POST['confpassword']) {
-                $this->errorMessage .= " | PASSWORDS DO NOT MATCH";
+                $this->errorMessage .= " | Passwords do not match";
                 $error=1;
             }
 
             if (strlen($_POST['password']) < 8) {
-                $this->errorMessage .= " | password doest not meet requirements";
+                $this->errorMessage .= " | Make sure your password is at least 8 characters long";
                 $error=1; 
             }
         }
@@ -136,23 +135,11 @@ class user {
     }
 
     public function checkUserRole($req) {
-        $stmt_checkRoleLevel = $this->conn->prepare("SELECT * FROM table_roles WHERE r_id = :u_role_fk");
-        $stmt_checkRoleLevel->bindValue(':u_role_fk', $_SESSION['u_role_fk'], PDO::PARAM_STR);
-        $stmt_checkRoleLevel->execute();
-        $currentUserRoleInfo = $stmt_checkRoleLevel->fetch();
-
-    // Check if fetch() returned false
-    if ($currentUserRoleInfo === false) {
-        $this->errorMessage = "Role not found in the database.";
-        return false;
-    }
-
-    // Fix the typo in the column name
-    if ($currentUserRoleInfo["r_level"] >= $req) {
-        return true;
-    } else {
-        return false;
-    }
+        if (isset($_SESSION['role_level']) && $_SESSION['role_level'] >= $req) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function redirect($url) {
@@ -164,7 +151,8 @@ class user {
     public function logout() {
         session_unset();
         session_destroy();
-        return true;
+        header("Location: login.php");
+        exit();
     }
 
     public function editUserInfo() {
